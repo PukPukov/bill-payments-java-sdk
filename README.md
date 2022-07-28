@@ -1,7 +1,4 @@
-# Universal payments API Java SDK
-
-[![Build Status](https://travis-ci.org/QIWI-API/bill-payments-java-sdk.svg?branch=master)](https://travis-ci.org/QIWI-API/bill-payments-java-sdk)
-[![Maven Central](https://img.shields.io/maven-central/v/com.qiwi/bill-payments-java-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.qiwi%22%20AND%20a:%22bill-payments-java-sdk%22)
+# API для работы с P2P QIWI API
 
 Java SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
 
@@ -10,10 +7,19 @@ Java SDK модуль для внедрения единого платежно�
 Установка с помощью [maven](https://maven.apache.org/download.cgi):
 
 ```xml
+<repository>
+    <id>bill-payments-mvn-repo</id>
+    <url>https://raw.github.com/PukPukov/bill-payments-java-sdk/mvn-repo/</url>
+    <snapshots>
+      <enabled>true</enabled>
+      <updatePolicy>always</updatePolicy>
+    </snapshots>
+</repository>
+
 <dependency>
     <groupId>com.qiwi</groupId>
     <artifactId>bill-payments-java-sdk</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
 </dependency>
 ```
 
@@ -343,3 +349,7 @@ BillPaymentClient client = BillPaymentClientFactory.createCustom(
 ## Лицензия
 
 [MIT](LICENSE)
+
+## Вопрос авторства
+
+Оригинальная SDK находится в этом [репозитории](https://github.com/QIWI-API/bill-payments-java-sdk). После очередной поломки обратной совместимости разработчиками Qiwi API SDK сломалась - и никто её чинить не собирался (даже пулл реквест с фиксом рассматривать не хотят). По сей причине я беру в свои руки разработку SDK и становлюсь её главным мейнтейнером. Дальнейшая разработка SDK будет идти в этом репозитории.
