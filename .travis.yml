@@ -1,0 +1,4 @@
+language: java
+script: ignore
+install:
+  - mvn test -Dqiwi.client.test.secret.key=${QIWI_CLIENT_TEST_SECRET_KEY} -Dqiwi.client.test.public.key=${QIWI_CLIENT_TEST_PUBLIC_KEY} -Dqiwi.client.test.bill-id-for-refund=${QIWI_CLIENT_TEST_BILL_ID_FOR_REFUND} -B
