@@ -34,7 +34,7 @@ Java SDK модуль для внедрения единого платежно�
 Для использования SDK требуется `secretKey`, подробности в документации — [для физ.лиц](https://developer.qiwi.com/ru/p2p-payments/#auth), [для юр.лиц](https://developer.qiwi.com/ru/bill-payments/#auth).
 
 ```java
-String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************";
+String secretKey = "eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPINIONPN090MTg5Z***********************";
 
 BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 ```
@@ -58,8 +58,6 @@ BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 В результате будет получена ссылка на форму оплаты, которую можно передать клиенту.
 Подробнее о доступных параметрах в документации — [для физ. лиц](https://developer.qiwi.com/ru/p2p-payments/#http), [для юр. лиц](https://developer.qiwi.com/ru/bill-payments/#http).
 
-```php
-
 ```java
 String publicKey = "2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc";
 
@@ -71,7 +69,6 @@ String billId = UUID.randomUUID().toString();
 String successUrl = "https://merchant.com/payment/success?billId=893794793973";
 
 String paymentUrl = client.createPaymentForm(new PaymentInfo(key, amount, billId, successUrl));
-
 ```
 
 В результате:
