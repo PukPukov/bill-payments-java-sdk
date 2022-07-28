@@ -344,7 +344,7 @@ BillPaymentClient client = BillPaymentClientFactory.createCustom(
 
 ## Требования
 
-* **JDK 8+**
+* **JDK 17+**
 
 ## Лицензия
 
