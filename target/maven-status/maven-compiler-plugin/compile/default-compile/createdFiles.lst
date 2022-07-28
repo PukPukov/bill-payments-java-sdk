@@ -13,7 +13,6 @@ com\qiwi\billpayments\sdk\exception\UrlEncodingException.class
 com\qiwi\billpayments\sdk\client\RequestMappingIntercessor.class
 com\qiwi\billpayments\sdk\exception\BadResponseException.class
 com\qiwi\billpayments\sdk\model\MoneyAmount.class
-com\qiwi\billpayments\sdk\client\BillPaymentClient$1.class
 com\qiwi\billpayments\sdk\client\BillPaymentClient.class
 com\qiwi\billpayments\sdk\model\in\CustomFields.class
 com\qiwi\billpayments\sdk\web\ApacheWebClient.class
@@ -23,7 +22,6 @@ com\qiwi\billpayments\sdk\model\ResponseData.class
 com\qiwi\billpayments\sdk\json\BigDecimalSerializer.class
 com\qiwi\billpayments\sdk\model\in\PaymentInfo.class
 com\qiwi\billpayments\sdk\exception\EncryptionException.class
-com\qiwi\billpayments\sdk\utils\BillPaymentsUtils$1.class
 com\qiwi\billpayments\sdk\client\BillPaymentClientFactory.class
 com\qiwi\billpayments\sdk\model\out\ErrorResponse.class
 com\qiwi\billpayments\sdk\model\Notification.class

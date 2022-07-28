@@ -21,12 +21,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BillPaymentClient {
+
     private static final String AUTHORIZATION_PREFIX = "Bearer ";
     private static final String CLIENT_NAME = "java_sdk";
     private static final String BILLS_URL = "https://api.qiwi.com/partner/bill/v1/bills/";
     private static final String PAYMENT_URL = "https://oplata.qiwi.com/create";
+    private static final String APP_VERSION = PomInfo.VERSION;
 
-    private final String appVersion = PomInfo.VERSION;
     private final RequestMappingIntercessor requestMappingIntercessor;
     private final Map<String, String> headers;
 
@@ -36,11 +37,11 @@ public class BillPaymentClient {
     }
 
     static Map<String, String> prepareHeaders(String bearerToken) {
-        return new HashMap<String, String>() {{
-            put(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString());
-            put(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString());
-            put(HttpHeaders.AUTHORIZATION, AUTHORIZATION_PREFIX + bearerToken);
-        }};
+        return Map.of(
+                HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString(),
+                HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.toString(),
+                HttpHeaders.AUTHORIZATION, AUTHORIZATION_PREFIX + bearerToken
+        );
     }
 
     public BillResponse createBill(CreateBillInfo info) throws URISyntaxException {
@@ -59,13 +60,13 @@ public class BillPaymentClient {
                 .addParameter("successUrl", successUrl)
                 .build()
                 .toString();
-        return response.withNewPayUrl(updatedUrl);
+        return response.withPayUrl(updatedUrl);
     }
 
     private CreateBillRequest appendCustomFields(CreateBillInfo info) {
         return CreateBillRequest.create(
                 info,
-                new CustomFields(CLIENT_NAME, appVersion, null)
+                new CustomFields(CLIENT_NAME, APP_VERSION, null)
         );
     }
 
@@ -114,7 +115,7 @@ public class BillPaymentClient {
             return new URIBuilder(PAYMENT_URL)
                     .addParameter("amount", paymentInfo.getAmount().formatValue())
                     .addParameter("customFields[apiClient]", CLIENT_NAME)
-                    .addParameter("customFields[apiClientVersion]", appVersion)
+                    .addParameter("customFields[apiClientVersion]", APP_VERSION)
                     .addParameter("publicKey", paymentInfo.getPublicKey())
                     .addParameter("billId", paymentInfo.getBillId())
                     .addParameter("successUrl", paymentInfo.getSuccessUrl())
@@ -126,7 +127,7 @@ public class BillPaymentClient {
         }
     }
 
-    public String getAppVersion() {
-        return appVersion;
+    public static String getAppVersion() {
+        return APP_VERSION;
     }
 }

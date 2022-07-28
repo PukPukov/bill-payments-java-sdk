@@ -11,9 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.TreeMap;
 
-public class BillPaymentsUtils {
+public final class BillPaymentsUtils {
+
+    private BillPaymentsUtils() {}
+
     private static final String FIELD_SEPARATOR = "|";
     private static final String SHA_256_ALGORITHM = "HmacSHA256";
     private static final Charset ENCODING = StandardCharsets.UTF_8;
@@ -28,13 +30,13 @@ public class BillPaymentsUtils {
     }
 
     static String joinFields(Notification notification) {
-        Map<String, String> fields = new TreeMap<String, String>() {{
-            put("amount.currency", notification.getBill().getAmount().getCurrency().toString());
-            put("amount.value", notification.getBill().getAmount().formatValue());
-            put("billId", notification.getBill().getBillId());
-            put("siteId", notification.getBill().getSiteId());
-            put("status", notification.getBill().getStatus().getValue());
-        }};
+        Map<String, String> fields = Map.of(
+                "amount.currency", notification.getBill().getAmount().getCurrency().toString(),
+                "amount.value", notification.getBill().getAmount().formatValue(),
+                "billId", notification.getBill().getBillId(),
+                "siteId", notification.getBill().getSiteId(),
+                "status", notification.getBill().getStatus().getValue()
+        );
         return String.join(FIELD_SEPARATOR, fields.values());
     }
 

@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ApacheWebClient implements WebClient {
+
     private final HttpClient httpClient;
 
     public ApacheWebClient(HttpClient httpClient) {

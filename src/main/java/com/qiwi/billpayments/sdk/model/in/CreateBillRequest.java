@@ -1,9 +1,15 @@
 package com.qiwi.billpayments.sdk.model.in;
 
 import com.qiwi.billpayments.sdk.model.MoneyAmount;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.With;
 
 import java.time.ZonedDateTime;
 
+@With
+@Getter
+@ToString
 public class CreateBillRequest {
     private final MoneyAmount amount;
     private final String comment;
@@ -33,36 +39,5 @@ public class CreateBillRequest {
                 info.getCustomer(),
                 customFields
         );
-    }
-
-    public MoneyAmount getAmount() {
-        return amount;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public ZonedDateTime getExpirationDateTime() {
-        return expirationDateTime;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public CustomFields getCustomFields() {
-        return customFields;
-    }
-
-    @Override
-    public String toString() {
-        return "CreateBillRequest{" +
-                "amount=" + amount +
-                ", comment='" + comment + '\'' +
-                ", expirationDateTime=" + expirationDateTime +
-                ", customer=" + customer +
-                ", customFields=" + customFields +
-                '}';
     }
 }

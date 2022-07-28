@@ -1,9 +1,15 @@
 package com.qiwi.billpayments.sdk.model.in;
 
 import com.qiwi.billpayments.sdk.model.MoneyAmount;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.With;
 
 import java.time.ZonedDateTime;
 
+@With
+@Getter
+@ToString
 public class CreateBillInfo {
     private final String billId;
     private final MoneyAmount amount;
@@ -26,41 +32,5 @@ public class CreateBillInfo {
         this.expirationDateTime = expirationDateTime;
         this.customer = customer;
         this.successUrl = successUrl;
-    }
-
-    public String getBillId() {
-        return billId;
-    }
-
-    public MoneyAmount getAmount() {
-        return amount;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public ZonedDateTime getExpirationDateTime() {
-        return expirationDateTime;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public String getSuccessUrl() {
-        return successUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "CreateBillInfo{" +
-                "billId='" + billId + '\'' +
-                ", amount=" + amount +
-                ", comment='" + comment + '\'' +
-                ", expirationDateTime=" + expirationDateTime +
-                ", customer=" + customer +
-                ", successUrl='" + successUrl + '\'' +
-                '}';
     }
 }

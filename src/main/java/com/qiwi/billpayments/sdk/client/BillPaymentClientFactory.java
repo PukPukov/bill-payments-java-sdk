@@ -4,7 +4,10 @@ import com.qiwi.billpayments.sdk.web.ApacheWebClient;
 import com.qiwi.billpayments.sdk.web.WebClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class BillPaymentClientFactory {
+public final class BillPaymentClientFactory {
+
+    private BillPaymentClientFactory() {}
+
     public static BillPaymentClient createDefault(String secretKey) {
         return new BillPaymentClient(
                 secretKey,

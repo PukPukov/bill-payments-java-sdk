@@ -1,7 +1,13 @@
 package com.qiwi.billpayments.sdk.model.in;
 
 import com.qiwi.billpayments.sdk.model.MoneyAmount;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.With;
 
+@With
+@Getter
+@ToString
 public class PaymentInfo {
     private final String publicKey;
     private final MoneyAmount amount;
@@ -18,31 +24,5 @@ public class PaymentInfo {
         this.amount = amount;
         this.billId = billId;
         this.successUrl = successUrl;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public MoneyAmount getAmount() {
-        return amount;
-    }
-
-    public String getBillId() {
-        return billId;
-    }
-
-    public String getSuccessUrl() {
-        return successUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "PaymentInfo{" +
-                "publicKey='" + publicKey + '\'' +
-                ", amount=" + amount +
-                ", billId='" + billId + '\'' +
-                ", successUrl='" + successUrl + '\'' +
-                '}';
     }
 }

@@ -2,7 +2,13 @@ package com.qiwi.billpayments.sdk.model.in;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.With;
 
+@With
+@Getter
+@ToString
 public class Customer {
     private final String email;
     private final String account;
@@ -17,26 +23,5 @@ public class Customer {
         this.email = email;
         this.account = account;
         this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "email='" + email + '\'' +
-                ", account='" + account + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
     }
 }
