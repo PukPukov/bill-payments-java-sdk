@@ -17,7 +17,7 @@ public class CreateBillInfo {
     private final ZonedDateTime expirationDateTime;
     private final Customer customer;
     private final String successUrl;
-    private final String customFieldsThemeCode;
+    private final String themeCode;
 
     public CreateBillInfo(
             String billId,
@@ -26,7 +26,7 @@ public class CreateBillInfo {
             ZonedDateTime expirationDateTime,
             Customer customer,
             String successUrl,
-            String customFieldsThemeCode
+            String themeCode
     ) {
         this.billId = billId;
         this.amount = amount;
@@ -34,6 +34,6 @@ public class CreateBillInfo {
         this.expirationDateTime = expirationDateTime;
         this.customer = customer;
         this.successUrl = successUrl;
-        this.customFieldsThemeCode = customFieldsThemeCode;
+        this.themeCode = themeCode;
     }
 }

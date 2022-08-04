@@ -27,7 +27,6 @@ public class BillResponse {
     private final String payUrl;
     private final CustomFields customFields;
     private final String recipientPhoneNumber;
-    private final String customFieldsThemeCode;
 
     @JsonCreator
     public BillResponse(
@@ -41,8 +40,7 @@ public class BillResponse {
             @JsonProperty("expirationDateTime") ZonedDateTime expirationDateTime,
             @JsonProperty("payUrl") String payUrl,
             @JsonProperty("customFields") CustomFields customFields,
-            @JsonProperty("recipientPhoneNumber") String recipientPhoneNumber,
-            @JsonProperty("customFields.themeCode") String customFieldsThemeCode
+            @JsonProperty("recipientPhoneNumber") String recipientPhoneNumber
     ) {
         this.siteId = siteId;
         this.billId = billId;
@@ -55,7 +53,6 @@ public class BillResponse {
         this.payUrl = payUrl;
         this.customFields = customFields;
         this.recipientPhoneNumber = recipientPhoneNumber;
-        this.customFieldsThemeCode = customFieldsThemeCode;
     }
 
 }
