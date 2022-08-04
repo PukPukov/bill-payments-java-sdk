@@ -53,7 +53,9 @@ BillPaymentClient client = BillPaymentClientFactory.createDefault(secretKey);
 * ключ идентификации провайдера `publicKey`, полученный в личном кабинете QIWI;
 * идентификатор счета `billId` внутри вашей системы;
 * сумму `amount`;
-* адрес перехода после успешной оплаты `successUrl`.
+* адрес перехода после успешной оплаты `successUrl`;
+* код темы платежной формы `themeCode`;
+* настройка способы оплаты счёта `paySourcesFilter`. Возможные значения: `qw` – QIWI Кошелек, `card` – банковская карта.
 
 В результате будет получена ссылка на форму оплаты, которую можно передать клиенту.
 Подробнее о доступных параметрах в документации — [для физ. лиц](https://developer.qiwi.com/ru/p2p-payments/#http), [для юр. лиц](https://developer.qiwi.com/ru/bill-payments/#http).
@@ -88,6 +90,8 @@ https://oplata.qiwi.com/create?amount=499.90&customFields%5BapiClient%5D=java_sd
 * срок оплаты счета `expirationDateTime` (тип `ZonedDateTime`);
 * информация о пользователе `customer`;
 * адрес перехода после успешной оплаты `successUrl`.
+* код темы платежной формы `themeCode`;
+* настройка способы оплаты счёта `paySourcesFilter`. Возможные значения: `qw` – QIWI Кошелек, `card` – банковская карта.
 
 В результате будет получен ответ с данными о выставленном счете.
 Подробное описание параметров для выставления счёта представлено в [руководстве по работе с SDK](https://developer.qiwi.com/ru/p2p-sdk-guide/#step4), а так же в документации [для физ.лиц](https://developer.qiwi.com/ru/p2p-payments/#create) и [для юр. лиц](https://developer.qiwi.com/ru/bill-payments/#create)
@@ -106,7 +110,9 @@ CreateBillInfo billInfo = new CreateBillInfo(
                         UUID.randomUUID().toString(),
                         "79123456789"
                 ),
-                "http://merchant.ru/success"
+                "http://merchant.ru/success",
+                "Yvan-FSrJiHdObH",
+                "qw"
         );
 BillResponse response = client.createBill(billInfo);
 ```
@@ -136,7 +142,9 @@ BillResponse response = client.createBill(billInfo);
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=c77a9051-1467-416b-991e-c25f06c61168&successUrl=http%3A%2F%2Fmerchant.ru%2Fsuccess",
   "customFields": {
     "apiClient": "java_sdk",
-    "apiClientVersion": "1.0.0"
+    "apiClientVersion": "1.0.0",
+    "themeCode": "Yvan-FSrJiHdObH",
+    "paySourcesFilter": "qw"
   }
 }
 ```
@@ -178,7 +186,9 @@ BillResponse response = client.getBillInfo(billId);
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=b77618b4-746c-485f-8bb8-fff43ddef114",
   "customFields": {
     "apiClient": "java_sdk",
-    "apiClientVersion": "1.0.0"
+    "apiClientVersion": "1.0.0",
+    "themeCode": "Yvan-FSrJiHdObH",
+    "paySourcesFilter": "qw"
   }
 }
 ```
@@ -222,7 +232,9 @@ BillResponse response = client.cancelBill(billId);
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=b77618b4-746c-485f-8bb8-fff43ddef114",
   "customFields": {
     "apiClient": "java_sdk",
-    "apiClientVersion": "1.0.0"
+    "apiClientVersion": "1.0.0",
+    "themeCode": "Yvan-FSrJiHdObH",
+    "paySourcesFilter": "qw"
   }
 }
 ```
