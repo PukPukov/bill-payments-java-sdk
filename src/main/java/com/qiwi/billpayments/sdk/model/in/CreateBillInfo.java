@@ -17,6 +17,8 @@ public class CreateBillInfo {
     private final ZonedDateTime expirationDateTime;
     private final Customer customer;
     private final String successUrl;
+    private final String themeCode;
+    private final String paySourcesFilter;
 
     public CreateBillInfo(
             String billId,
@@ -24,7 +26,9 @@ public class CreateBillInfo {
             String comment,
             ZonedDateTime expirationDateTime,
             Customer customer,
-            String successUrl
+            String successUrl,
+            String themeCode,
+            String paySourcesFilter
     ) {
         this.billId = billId;
         this.amount = amount;
@@ -32,5 +36,7 @@ public class CreateBillInfo {
         this.expirationDateTime = expirationDateTime;
         this.customer = customer;
         this.successUrl = successUrl;
+        this.themeCode = themeCode;
+        this.paySourcesFilter = paySourcesFilter;
     }
 }

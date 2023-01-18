@@ -66,7 +66,11 @@ public class BillPaymentClient {
     private CreateBillRequest appendCustomFields(CreateBillInfo info) {
         return CreateBillRequest.create(
                 info,
-                new CustomFields(CLIENT_NAME, APP_VERSION, null)
+                new CustomFields(CLIENT_NAME,
+                        APP_VERSION,
+                        null,
+                        info.getThemeCode(),
+                        info.getPaySourcesFilter())
         );
     }
 
@@ -116,6 +120,7 @@ public class BillPaymentClient {
                     .addParameter("amount", paymentInfo.getAmount().formatValue())
                     .addParameter("customFields[apiClient]", CLIENT_NAME)
                     .addParameter("customFields[apiClientVersion]", APP_VERSION)
+                    .addParameter("customFields[themeCode]", paymentInfo.getThemeCode())
                     .addParameter("publicKey", paymentInfo.getPublicKey())
                     .addParameter("billId", paymentInfo.getBillId())
                     .addParameter("successUrl", paymentInfo.getSuccessUrl())

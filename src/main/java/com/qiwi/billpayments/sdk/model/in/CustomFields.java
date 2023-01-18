@@ -15,16 +15,22 @@ public class CustomFields {
     private final String apiClient;
     private final String apiClientVersion;
     private final String checkoutReferer;
+    private final String themeCode;
+    private final String paySourcesFilter;
 
     @JsonCreator
     public CustomFields(
             @JsonProperty("apiClient") String apiClient,
             @JsonProperty("apiClientVersion") String apiClientVersion,
-            @JsonProperty("CHECKOUT_REFERER") String checkoutReferer
+            @JsonProperty("CHECKOUT_REFERER") String checkoutReferer,
+            @JsonProperty("themeCode") String themeCode,
+            @JsonProperty("paySourcesFilter") String paySourcesFilter
     ) {
         this.apiClient = apiClient;
         this.apiClientVersion = apiClientVersion;
         this.checkoutReferer = checkoutReferer;
+        this.themeCode = themeCode;
+        this.paySourcesFilter = paySourcesFilter;
     }
 
 }
