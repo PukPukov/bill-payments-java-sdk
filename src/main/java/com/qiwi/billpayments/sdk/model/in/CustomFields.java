@@ -3,6 +3,7 @@ package com.qiwi.billpayments.sdk.model.in;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.With;
@@ -11,6 +12,7 @@ import lombok.With;
 @Getter
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class CustomFields {
     private final String apiClient;
     private final String apiClientVersion;
@@ -33,4 +35,11 @@ public class CustomFields {
         this.paySourcesFilter = paySourcesFilter;
     }
 
+    public CustomFields(String client, String version, String checkoutReferer) {
+        this.apiClient = client;
+        this.apiClientVersion = version;
+        this.checkoutReferer = checkoutReferer;
+        this.themeCode = null;
+        this.paySourcesFilter = null;
+    }
 }

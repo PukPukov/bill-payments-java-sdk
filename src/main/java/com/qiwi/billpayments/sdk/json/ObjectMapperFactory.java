@@ -9,6 +9,10 @@ public final class ObjectMapperFactory {
 
     private ObjectMapperFactory() {}
 
+    /**
+     * Dont use
+     */
+    @Deprecated
     public static ObjectMapper create() {
         return new ObjectMapper()
                 .registerModule(new JavaTimeModule())

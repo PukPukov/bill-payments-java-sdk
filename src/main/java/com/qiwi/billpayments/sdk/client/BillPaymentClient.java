@@ -10,13 +10,15 @@ import com.qiwi.billpayments.sdk.model.in.PaymentInfo;
 import com.qiwi.billpayments.sdk.model.in.RefundBillRequest;
 import com.qiwi.billpayments.sdk.model.out.BillResponse;
 import com.qiwi.billpayments.sdk.model.out.RefundResponse;
-import com.qiwi.billpayments.sdk.web.WebClient;
+import com.qiwi.billpayments.sdk.web.Get;
+import com.qiwi.billpayments.sdk.web.Post;
+import com.qiwi.billpayments.sdk.web.Put;
+import lombok.SneakyThrows;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,12 +30,11 @@ public class BillPaymentClient {
     private static final String PAYMENT_URL = "https://oplata.qiwi.com/create";
     private static final String APP_VERSION = PomInfo.VERSION;
 
-    private final RequestMappingIntercessor requestMappingIntercessor;
+    private final RequestMapperNode requestMapperNode = new RequestMapperNode();
     private final Map<String, String> headers;
 
-    public BillPaymentClient(String secretKey, WebClient webClient) {
+    public BillPaymentClient(String secretKey) {
         this.headers = prepareHeaders(secretKey);
-        this.requestMappingIntercessor = new RequestMappingIntercessor(webClient);
     }
 
     static Map<String, String> prepareHeaders(String bearerToken) {
@@ -43,72 +44,64 @@ public class BillPaymentClient {
                 HttpHeaders.AUTHORIZATION, AUTHORIZATION_PREFIX + bearerToken
         );
     }
-
-    public BillResponse createBill(CreateBillInfo info) throws URISyntaxException {
-        BillResponse response = requestMappingIntercessor.request(
-                "PUT",
+    
+    @SneakyThrows
+    public BillResponse createBill(CreateBillInfo info) {
+        BillResponse response = requestMapperNode.request(
+                new Put(),
                 BILLS_URL + info.getBillId(),
-                Optional.of(appendCustomFields(info)),
+                appendCustomFields(info),
                 BillResponse.class,
                 headers
         );
-        return appendSuccessUrl(response, info.getSuccessUrl());
+        return new SuccessURLAppender(response, info.getSuccessUrl()).get();
     }
-
-    static BillResponse appendSuccessUrl(BillResponse response, String successUrl) throws URISyntaxException {
-        String updatedUrl = new URIBuilder(response.getPayUrl())
-                .addParameter("successUrl", successUrl)
-                .build()
-                .toString();
-        return response.withPayUrl(updatedUrl);
-    }
-
+    
     private CreateBillRequest appendCustomFields(CreateBillInfo info) {
         return CreateBillRequest.create(
                 info,
-                new CustomFields(CLIENT_NAME,
-                        APP_VERSION,
+                new CustomFields(
+                        CLIENT_NAME,
+                        null,
                         null,
                         info.getThemeCode(),
-                        info.getPaySourcesFilter())
+                        info.getPaySourcesFilter()
+                )
         );
     }
 
     public BillResponse getBillInfo(String billId) {
-        return requestMappingIntercessor.request(
-                "GET",
+        return requestMapperNode.request(
+                new Get(),
                 BILLS_URL + billId,
-                Optional.empty(),
                 BillResponse.class,
                 headers
         );
     }
 
     public BillResponse cancelBill(String billId) {
-        return requestMappingIntercessor.request(
-                "POST",
+        return requestMapperNode.request(
+                new Post(),
                 BILLS_URL + billId + "/reject",
-                Optional.empty(),
                 BillResponse.class,
                 headers
         );
     }
 
     public RefundResponse refundBill(String billId, String refundId, MoneyAmount amount) {
-        return requestMappingIntercessor.request(
-                "PUT",
+        return requestMapperNode.request(
+                new Put(),
                 BILLS_URL + billId + "/refunds/" + refundId,
-                Optional.of(new RefundBillRequest(amount)),
+                new RefundBillRequest(amount),
                 RefundResponse.class,
                 headers
         );
     }
 
     public RefundResponse getRefundInfo(String billId, String refundId) {
-        return requestMappingIntercessor.request(
-                "GET",
+        return requestMapperNode.request(
+                new Get(),
                 BILLS_URL + billId + "/refunds/" + refundId,
-                Optional.empty(),
                 RefundResponse.class,
                 headers
         );

@@ -1,6 +1,7 @@
 package com.qiwi.billpayments.sdk.utils;
 
 import com.qiwi.billpayments.sdk.exception.EncryptionException;
+import com.qiwi.billpayments.sdk.exception.ResponseException;
 import com.qiwi.billpayments.sdk.model.Notification;
 import org.apache.commons.codec.binary.Hex;
 

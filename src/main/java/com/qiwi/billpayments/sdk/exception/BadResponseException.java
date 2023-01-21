@@ -1,20 +1,35 @@
 package com.qiwi.billpayments.sdk.exception;
 
-import com.qiwi.billpayments.sdk.model.ResponseData;
 import lombok.Getter;
+import org.apache.http.impl.EnglishReasonPhraseCatalog;
+
+import java.util.Locale;
 
 @Getter
-public class BadResponseException extends RuntimeException {
+public class BadResponseException extends ResponseException {
 
-    private final int httpStatus;
-
-    public BadResponseException(ResponseData responseData) {
-        super(responseData.toString());
-        this.httpStatus = responseData.getHttpStatus();
+    private final String responseBody;
+    private final int responseCode;
+    private final Class<?> targetClass;
+    private final String originalMessage;
+    
+    public BadResponseException(String responseBody, int responseCode, Class<?> targetClass, String message) {
+        super(
+                "\n"+ 
+                "--- QIWI BILLPAYMENTS SDK EXCEPTION ---\n"+
+                "Server responded with strange data, that cannot be mapped to "+targetClass.getName()+".\n"+
+                "Maybe QIWI again broke backward compatibility?\n" +
+                "Response code: "+ responseCode + " (" + EnglishReasonPhraseCatalog.INSTANCE.getReason(responseCode, Locale.ENGLISH) + ")\n"+ 
+                "Additional information: "+ message + "\n"+
+                "--- --- --- --- --- --- --- --- --- ---"
+        );
+        this.responseBody = responseBody;
+        this.responseCode = responseCode;
+        this.targetClass = targetClass;
+        this.originalMessage = message;
     }
 
-    public BadResponseException(int httpStatus) {
-        super("empty body, HTTP status " + httpStatus);
-        this.httpStatus = httpStatus;
+    public int getHttpStatus() {
+        return responseCode;
     }
 }

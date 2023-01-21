@@ -1,6 +1,7 @@
 package com.qiwi.billpayments.sdk.model.in;
 
 import com.qiwi.billpayments.sdk.model.MoneyAmount;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.With;
@@ -8,6 +9,7 @@ import lombok.With;
 @With
 @Getter
 @ToString
+@AllArgsConstructor
 public class PaymentInfo {
     private final String publicKey;
     private final MoneyAmount amount;
@@ -17,18 +19,16 @@ public class PaymentInfo {
     private final String paySourcesFilter;
 
     public PaymentInfo(
-            String publicKey,
-            MoneyAmount amount,
-            String billId,
-            String successUrl,
-            String themeCode,
-            String paySourcesFilter
+            String key, 
+            MoneyAmount amount, 
+            String billId, 
+            String successUrl
     ) {
-        this.publicKey = publicKey;
+        this.publicKey = key;
         this.amount = amount;
         this.billId = billId;
         this.successUrl = successUrl;
-        this.themeCode = themeCode;
-        this.paySourcesFilter = paySourcesFilter;
+        this.themeCode = null;
+        this.paySourcesFilter = null;
     }
 }
