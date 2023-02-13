@@ -1,3 +1,4 @@
+![Release](https://jitpack.io/v/ancap-kun/bill-payments-java-sdk.svg?style=flat-square)
 # API для работы с P2P QIWI API
 
 Java SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
@@ -8,18 +9,14 @@ Java SDK модуль для внедрения единого платежно�
 
 ```xml
 <repository>
-    <id>bill-payments-mvn-repo</id>
-    <url>https://raw.github.com/PukPukov/bill-payments-java-sdk/mvn-repo/</url>
-    <snapshots>
-      <enabled>true</enabled>
-      <updatePolicy>always</updatePolicy>
-    </snapshots>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
 </repository>
 
 <dependency>
-    <groupId>com.qiwi</groupId>
+    <groupId>com.github.ancap-kun</groupId>
     <artifactId>bill-payments-java-sdk</artifactId>
-    <version>LATEST</version>
+    <version>смотри вверху</version>
 </dependency>
 ```
 
